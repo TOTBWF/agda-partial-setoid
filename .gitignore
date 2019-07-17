@@ -1,0 +1,16 @@
+*~
+.*.swp
+*.agdai
+*.agda.el
+.DS_Store
+*.lagda.el
+*.hi
+*.o
+*.tix
+*.vim
+dist
+Everything.agda
+EverythingSafe.agda
+EverythingSafeGuardedness.agda
+EverythingSafeSizedTypes.agda
+html
