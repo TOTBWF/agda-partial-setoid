@@ -81,7 +81,7 @@ module Kernel {c₁ ℓ₁ c₂ ℓ₂}
             where open import Relation.Binary.Reasoning.Setoid (Group.setoid To)
 
   -- If the homomorphism is injective, then the kernel is trivial
-  inj-kernelʳ : (IsGroupMorphism From To (_⟨$⟩_ ϕ)) → Injective ϕ → (∀ {g} → g ≈₁ ε₁ → g ∈ kernel)
-  inj-kernelʳ ϕ-homo ϕ-inj g≈₁ε₁ = g≈ε (≈₂-trans (ϕ-cong g≈₁ε₁) ε-homo)
+  inj-kernelʳ : (IsGroupMorphism From To (_⟨$⟩_ ϕ)) → Injective ϕ → (∀ {g} → g ∈ kernel → g ≈₁ ε₁)
+  inj-kernelʳ ϕ-homo ϕ-inj (g₁≈g₂ ϕ⟨g⟩≈ε _) = ϕ-inj (≈₂-trans ϕ⟨g⟩≈ε (≈₂-sym ε-homo))
     where open IsGroupMorphism ϕ-homo
           open Π ϕ renaming (cong to ϕ-cong)
