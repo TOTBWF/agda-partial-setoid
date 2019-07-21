@@ -60,6 +60,18 @@ record _⇔_ {c ℓ} {A : Set c} (S : PartialSetoid c ℓ A) (T : PartialSetoid 
     subsetˡ : S ⊆ T
     subsetʳ : T ⊆ S
 
+-- Polymorphic bottom type for reasons
+data ⊥ {ℓ} : Set ℓ where
+
+⊥-elim : ∀ {w} {Whatever : Set w} → ⊥ {w} → Whatever
+⊥-elim ()
+
+∅ : ∀ {c ℓ} {A : Set c} → PartialSetoid c ℓ A
+∅ = record {
+  _≈_ = λ x y → ⊥
+  ; isPartialEquivalence = record
+    { sym = λ x → x ; trans = λ x _ → x }
+  }
 
 -- Any setoid is alo a partial setoid
 partial-setoid : ∀ (S : Setoid c ℓ) → PartialSetoid c ℓ (Setoid.Carrier S)
