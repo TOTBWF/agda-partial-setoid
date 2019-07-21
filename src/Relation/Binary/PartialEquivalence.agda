@@ -8,6 +8,8 @@ open import Relation.Nullary using (¬_)
 
 open import Level
 
+open import Relation.Binary.Core public
+
 private
   variable
     a b c ℓ : Level
