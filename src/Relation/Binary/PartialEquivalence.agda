@@ -32,7 +32,7 @@ record IsPartialEquivalence {A : Set a} (_≈_ : Rel A ℓ) : Set (a ⊔ ℓ) wh
 -- subsets and membership simpler
 ------------------------------------------------------------------------
 
-record PartialSetoid c ℓ (A : Set c) : Set (suc (c ⊔ ℓ)) where
+record PartialSetoid {c} ℓ (A : Set c) : Set (suc (c ⊔ ℓ)) where
   infix 4 _≈_
   field
     _≈_ : Rel A ℓ
@@ -45,38 +45,38 @@ record PartialSetoid c ℓ (A : Set c) : Set (suc (c ⊔ ℓ)) where
 
 -- Membership in a partial setoid is the same
 -- as having a proof of refl
-_∈_ : ∀ {A : Set c} → A → PartialSetoid c ℓ A → Set _
+_∈_ : ∀ {A : Set c} → A → PartialSetoid ℓ A → Set _
 x ∈ S = x ≈ x
   where open PartialSetoid S
 
-_∉_ : ∀ {A : Set c} → A → PartialSetoid c ℓ A → Set _
+_∉_ : ∀ {A : Set c} → A → PartialSetoid ℓ A → Set _
 x ∉ S = x ≉ x
   where open PartialSetoid S
 
-_⊆_ : ∀ {A : Set c} → Rel (PartialSetoid c ℓ A) _
+_⊆_ : ∀ {A : Set c} → Rel (PartialSetoid ℓ A) _
 S ⊆ T = ∀ {x} → x ∈ S → x ∈ T
 
 -- Two sets are equivalent when they are both subsets of one another
-record _⇔_ {c ℓ} {A : Set c} (S : PartialSetoid c ℓ A) (T : PartialSetoid c ℓ A) : Set (c ⊔ ℓ) where
+record _⇔_ {c ℓ} {A : Set c} (S : PartialSetoid ℓ A) (T : PartialSetoid ℓ A) : Set (c ⊔ ℓ) where
   field
     subsetˡ : S ⊆ T
     subsetʳ : T ⊆ S
 
--- Polymorphic bottom type for reasons
-data ⊥ {ℓ} : Set ℓ where
+-- -- Polymorphic bottom type for reasons
+-- data ⊥ {ℓ} : Set ℓ where
 
-⊥-elim : ∀ {w} {Whatever : Set w} → ⊥ {w} → Whatever
-⊥-elim ()
+-- ⊥-elim : ∀ {w} {Whatever : Set w} → ⊥ {w} → Whatever
+-- ⊥-elim ()
 
-∅ : ∀ {c ℓ} {A : Set c} → PartialSetoid c ℓ A
-∅ = record {
-  _≈_ = λ x y → ⊥
-  ; isPartialEquivalence = record
-    { sym = λ x → x ; trans = λ x _ → x }
-  }
+-- ∅ : ∀ {c ℓ} {A : Set c} → PartialSetoid ℓ A
+-- ∅ = record {
+--   _≈_ = λ x y → ⊥
+--   ; isPartialEquivalence = record
+--     { sym = λ x → x ; trans = λ x _ → x }
+--   }
 
 -- Any setoid is alo a partial setoid
-partial-setoid : ∀ (S : Setoid c ℓ) → PartialSetoid c ℓ (Setoid.Carrier S)
+partial-setoid : ∀ (S : Setoid c ℓ) → PartialSetoid ℓ (Setoid.Carrier S)
 partial-setoid S = record
   { _≈_ = _≈_
   ; isPartialEquivalence = record

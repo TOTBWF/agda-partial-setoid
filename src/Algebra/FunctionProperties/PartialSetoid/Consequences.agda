@@ -8,7 +8,7 @@
 open import Relation.Binary.PartialEquivalence using (Rel; PartialSetoid)
 
 module Algebra.FunctionProperties.PartialSetoid.Consequences
-  {a ℓ} {A : Set a} (S : PartialSetoid a ℓ A) where
+  {a ℓ} {A : Set a} (S : PartialSetoid ℓ A) where
 
 open PartialSetoid S
 

@@ -8,7 +8,7 @@
 
 open import Relation.Binary.PartialEquivalence
 
-module Relation.Binary.Reasoning.PartialSetoid {s₁ s₂} {A : Set s₁} (S : PartialSetoid s₁ s₂ A) where
+module Relation.Binary.Reasoning.PartialSetoid {s₁ s₂} {A : Set s₁} (S : PartialSetoid s₂ A) where
 
 open import Level using (_⊔_)
 

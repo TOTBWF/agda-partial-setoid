@@ -29,7 +29,7 @@ record IsMagma (∙ : Op₂ A) : Set (a ⊔ ℓ) where
 
   open IsPartialEquivalence isPartialEquivalence public
 
-  partialSetoid : PartialSetoid a ℓ A
+  partialSetoid : PartialSetoid ℓ A
   partialSetoid = record { isPartialEquivalence = isPartialEquivalence }
 
   ∙-congˡ : LeftCongruent ∙
